@@ -1,0 +1,33 @@
+<div class="container">
+
+<h1>Mypage</h1>
+
+
+<h2>My Posts</h2>
+<table class ="table table-striped">
+ <thead>
+    <tr>
+      <th>Title</th><th>Body</th><th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+      <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
+          <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
+      </td>
+    </tr>
+   <% end %>
+  </tbody>
+</table>
+<div class="container">
+ <div class="row">
+  <div class="col-6 text-center"> <%= link_to "登録情報", edit_user_path(current_user.id), class:"btn btn-success" %></div>
+  <div class="col-6 text-center"><%= link_to '投稿フォーム', new_post_path, class:"btn btn-warning" %></div>
+ </div>
+</div>
+
+
+</div>
