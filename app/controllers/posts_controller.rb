@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @choice = Choice.new
   end
 
   def create
@@ -33,6 +34,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, choices_attributes: [:id, :post_id, :choices, :_destroy])
   end
 end

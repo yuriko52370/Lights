@@ -1,0 +1,9 @@
+<div class="nested-fields">
+    <%= f.text_field :choice %>
+
+    <%= link_to_remove_association "-", f,
+     data: {
+      association_insertion_node: '#detail-association-insertion-point',
+      association_insertion_method: 'after'
+      }%>
+</div>

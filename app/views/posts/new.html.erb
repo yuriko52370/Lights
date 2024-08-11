@@ -3,6 +3,14 @@
 <%= form_with model: @post do |f| %>
 <h4>Title</h4>
   <%= f.text_field :title %>
+
+<h4>Choices</h4>
+  <%= f.fields_for :choices do |t| %>
+    <%= render "posts/choice_fields", f: t %>
+  <% end %>
+
+  <%= link_to_add_association "+", f, :choices %>
+
 <h4>Body</h4>
   <%= f.text_area :body %>
   <%= f.submit '投稿' %>
