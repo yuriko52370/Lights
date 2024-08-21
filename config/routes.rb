@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     member do
       get :mypage
     end
+  resources :choice, only: [:new, :create, :index, :show, :edit, :update]
   end
   end
