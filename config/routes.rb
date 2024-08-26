@@ -10,4 +10,5 @@ Rails.application.routes.draw do
     end
   resources :choice, only: [:new, :create, :index, :show, :edit, :update]
   end
+  get '/search', to: 'searches#search'
   end

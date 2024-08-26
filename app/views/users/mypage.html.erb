@@ -15,6 +15,12 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.body %></td>
+      <td>
+        <% post.choices.each do |one_choice| %>
+          <%= one_choice.choice %><br>
+        <% end %>
+       
+      </td>
       <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
           <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
       </td>

@@ -34,6 +34,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, choices_attributes: [:id, :post_id, :choices, :_destroy])
+    params.require(:post).permit(:title, :body, choices_attributes: [:id, :post_id, :choice, :_destroy])
   end
 end
