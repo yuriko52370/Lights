@@ -3,3 +3,11 @@
 
 <h2>Body</h2>
 <p><%= @post.body %></p>
+
+<h2>Choice</h2>
+<p><% @post.choices.each do |one_choice| %>
+          <%= one_choice.choice %><br>
+        <% end %>
+</p>
+
+<%= link_to'Back', mypage_user_path, class: 'btn btn-info' %>

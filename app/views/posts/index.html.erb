@@ -1,5 +1,27 @@
+<div class="container">
 <h2>Index</h2>
-<% @posts.each do |post| %>
-  <p><%= post.title %></p></br>
-  <p><%= post.body %></p>
-<% end %>
+<table class ="table table-striped">
+ <thead>
+    <tr>
+      <th>Title</th><th>Body</th><th>Choice</th><th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+      <td>
+        <% post.choices.each do |one_choice| %>
+          <%= one_choice.choice %><br>
+        <% end %>
+
+      </td>
+      <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
+          <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
+      </td>
+    </tr>
+   <% end %>
+  </tbody>
+</table>
+</div>

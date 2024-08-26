@@ -4,20 +4,20 @@
 <h4>Title</h4>
   <%= f.text_field :title %>
 
-<h4>Choices</h4>
-  <div id="cocoon_choices">
-    <%= f.fields_for :choices do |t| %>
-      <%= render "posts/choice_fields", f: t %>
-    <% end %>
-  
-    <%= link_to_add_association "+", f, :choices,
-      data: {
-        association_insertion_node: '#cocoon_choices',
-        association_insertion_method: 'before'
-    } %>
-  </div>
-
 <h4>Body</h4>
   <%= f.text_area :body %>
+
+<h4>Choices</h4>
+<div id="cocoon_choices">
+  <%= f.fields_for :choices do |t| %>
+    <%= render "posts/choice_fields", f: t %>
+  <% end %>
+
+  <%= link_to_add_association "+", f, :choices,
+    data: {
+      association_insertion_node: '#cocoon_choices',
+      association_insertion_method: 'before'
+  } %>
+  </div>
   <%= f.submit '投稿' %>
 <% end %>
