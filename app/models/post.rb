@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :choices, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   accepts_nested_attributes_for :choices
 
   def self.search_for(content, method)
@@ -14,4 +15,5 @@ class Post < ApplicationRecord
       Post.where('title LIKE ?', '%'+content+'%')
     end
   end
+
 end

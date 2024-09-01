@@ -1,7 +1,32 @@
 <% if @model == 'user' %>
 	<h3>Users search for "<%= @content %>"</h3>
   <%= render '/users', users: @records %>
+  
 <% elsif @model == 'post' %>
 	<h3>Posts search for "<%= @content %>"</h3>
-  <%= render '/posts', posts: @records %>
+
+  <table class ="table table-striped">
+ <thead>
+    <tr>
+      <th>Title</th><th>Body</th><th>Choice</th><th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @records.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+      <td>
+        <% post.choices.each do |one_choice| %>
+          <%= one_choice.choice %><br>
+        <% end %>
+
+      </td>
+      <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
+          <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
+      </td>
+    </tr>
+   <% end %>
+  </tbody>
+</table>
 <% end %>

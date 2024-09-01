@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "homes#top"
   get "homes/about" => "homes#about", as: "about"
+  get '/search', to: 'searches#search'
 
-  resources :posts, only: [:new, :create, :index, :show, :edit, :update]
+  resources :posts, only: [:new, :create, :index, :show, :edit, :update] do
+    resources :choice, only: [:new, :create, :index, :show, :edit, :update] do
+      resource :favorite, only: [:create, :destroy]
+    end
+  end
+
   resources :users, only: [ :edit, :mypage] do
     member do
       get :mypage
     end
-  resources :choice, only: [:new, :create, :index, :show, :edit, :update]
   end
-  get '/search', to: 'searches#search'
+
   end

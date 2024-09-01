@@ -1,13 +1,48 @@
-<h2>Title</h2>
-<p><%= @post.title %></p>
+<div>
+    <h2>Title</h2>
+    <p><%= @post.title %></p>
 
-<h2>Body</h2>
-<p><%= @post.body %></p>
+    <h2>Body</h2>
+    <p><%= @post.body %></p>
 
-<h2>Choice</h2>
-<p><% @post.choices.each do |one_choice| %>
-          <%= one_choice.choice %><br>
+    <h2>Choice</h2>
+    
+    <% is_not_choice = true %>
+    <% @post.choices.each do |one_choice| %>
+      <% if one_choice.favorited_by?(current_user) %>
+        <% is_not_choice = false %>
+      <% end %>
+    <% end %>
+    
+    <p>
+      <% total_count = 0 %>
+      <% @post.choices.each do |one_choice| %>
+        <% total_count += one_choice.favorites.count %>
+        <%= one_choice.choice %>
+        
+        <% if one_choice.favorited_by?(current_user) %>
+          <p>
+            <%= link_to post_choice_favorite_path(@post, one_choice.id), method: :delete do %>
+              ♥<%= one_choice.favorites.count %> いいね
+            <% end %>
+          </p>
+        
+        <% elsif is_not_choice == false %>
+          <p>別の選択肢を選んでいます</p>
+        <% else %>
+          <p>
+            <%= link_to post_choice_favorite_path(@post, one_choice.id), method: :post do %>
+              ♡<%= one_choice.favorites.count %> いいね
+            <% end %>
+          </p>
         <% end %>
-</p>
+        
+        <br>
+      <% end %>
+      
+      total : <%= total_count %>
+    </p>
 
-<%= link_to'Back', mypage_user_path, class: 'btn btn-info' %>
+
+    <%= link_to'Back', mypage_user_path, class: 'btn btn-info' %>
+</div>

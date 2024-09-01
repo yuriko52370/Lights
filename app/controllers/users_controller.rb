@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @posts = Post.all
+    @posts = @user.posts
   end
 
 
