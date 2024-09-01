@@ -6,27 +6,27 @@
     <p><%= @post.body %></p>
 
     <h2>Choice</h2>
-    
+
     <% is_not_choice = true %>
     <% @post.choices.each do |one_choice| %>
       <% if one_choice.favorited_by?(current_user) %>
         <% is_not_choice = false %>
       <% end %>
     <% end %>
-    
+
     <p>
       <% total_count = 0 %>
       <% @post.choices.each do |one_choice| %>
         <% total_count += one_choice.favorites.count %>
         <%= one_choice.choice %>
-        
+
         <% if one_choice.favorited_by?(current_user) %>
           <p>
             <%= link_to post_choice_favorite_path(@post, one_choice.id), method: :delete do %>
               ♥<%= one_choice.favorites.count %> いいね
             <% end %>
           </p>
-        
+
         <% elsif is_not_choice == false %>
           <p>別の選択肢を選んでいます</p>
         <% else %>
@@ -36,13 +36,27 @@
             <% end %>
           </p>
         <% end %>
-        
+
         <br>
       <% end %>
-      
+
       total : <%= total_count %>
     </p>
 
+    <div>
+    <p>コメント件数：<%= @post.comments.count %></p>
+    <% @post.comments.each do |comment| %>
+      <%= comment.user.name %>
+      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+      </br>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with model: [@post, @comment] do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+</div>
 
-    <%= link_to'Back', mypage_user_path, class: 'btn btn-info' %>
+    
 </div>

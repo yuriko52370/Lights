@@ -3,7 +3,7 @@
 <table class ="table table-striped">
  <thead>
     <tr>
-      <th>Title</th><th>Body</th><th>Choice</th><th colspan="1"></th>
+      <th>Title</th><th>Body</th><th>Choice</th><th>Comments</th><th colspan="1"></th>
     </tr>
   </thead>
   <tbody>
@@ -15,8 +15,8 @@
         <% post.choices.each do |one_choice| %>
           <%= one_choice.choice %><br>
         <% end %>
-
       </td>
+      <td><p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p></td>
       <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
           <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
       </td>

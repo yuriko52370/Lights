@@ -2,12 +2,11 @@
 
 <h1>Mypage</h1>
 
-
 <h2>My Posts</h2>
 <table class ="table table-striped">
  <thead>
     <tr>
-      <th>Title</th><th>Body</th><th>Choice</th><th colspan="1"></th>
+      <th>Title</th><th>Body</th><th>Choice</th><th>Comments</th><th colspan="1"></th>
     </tr>
   </thead>
   <tbody>
@@ -19,8 +18,8 @@
         <% post.choices.each do |one_choice| %>
           <%= one_choice.choice %><br>
         <% end %>
-       
       </td>
+      <td><p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p></td>
       <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
           <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
       </td>
@@ -30,8 +29,9 @@
 </table>
 <div class="container">
  <div class="row">
-  <div class="col-6 text-center"> <%= link_to "登録情報", edit_user_path(current_user.id), class:"btn btn-success" %></div>
-  <div class="col-6 text-center"><%= link_to '投稿フォーム', new_post_path, class:"btn btn-warning" %></div>
+  <div class="col-4 text-center"> <%= link_to "登録情報", edit_user_path(current_user.id), class:"btn btn-success" %></div>
+  <div class="col-4 text-center"><%= link_to '投稿フォーム', new_post_path, class:"btn btn-warning" %></div>
+  <div class="col-4 text-center"><%= link_to'みんなの投稿', posts_path, class: 'btn btn-info' %></div>
  </div>
 </div>
 

@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :choices, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
   accepts_nested_attributes_for :choices
 
   def self.search_for(content, method)

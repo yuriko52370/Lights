@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :choice, only: [:new, :create, :index, :show, :edit, :update] do
       resource :favorite, only: [:create, :destroy]
     end
+     resources :comments, only: [:create]
   end
 
   resources :users, only: [ :edit, :mypage] do
