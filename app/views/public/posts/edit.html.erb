@@ -8,7 +8,7 @@
 <h4>Choices</h4>
   <div id="cocoon_choices">
     <%= f.fields_for :choices do |t| %>
-      <%= render "posts/choice_fields", f: t %>
+      <%= render "public/posts/choice_fields", f: t %>
     <% end %>
 
     <%= link_to_add_association "+", f, :choices,
