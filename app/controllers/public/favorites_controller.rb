@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class Public::FavoritesController < ApplicationController
 
   def create
     choice = Choice.find(params[:choice_id])
