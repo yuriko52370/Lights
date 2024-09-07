@@ -23,7 +23,7 @@ Rails.application.routes.draw do
        resources :comments, only: [:create]
     end
 
-    resources :users, only: [ :edit, :mypage] do
+    resources :users, only: [:edit, :mypage, :update] do
       member do
         get :mypage
       end

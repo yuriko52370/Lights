@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
 
+
   def self.search_for(content, method)
     if method == 'perfect'
       User.where(name: content)

@@ -1,5 +1,12 @@
 class Public::UsersController < ApplicationController
   def edit
+    @user = current_user
+  end
+
+  def update
+    user = current_user
+    user.update(user_params)
+    redirect_to mypage_user_path(user.id)
   end
 
   def mypage

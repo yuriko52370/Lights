@@ -1,13 +1,24 @@
+<div class="container">
 <h1>新規投稿</h1>
 
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @post do |f| %>
-<h4>Title</h4>
+<h4>投稿タイトル</h4>
   <%= f.text_field :title %>
 
-<h4>Body</h4>
+<h4>投稿文</h4>
   <%= f.text_area :body %>
 
-<h4>Choices</h4>
+<h4>投票の選択肢</h4>
+<p>投票機能を使用する場合は＋ボタンで選択肢を追加してください</p>
 <div id="cocoon_choices">
   <%= f.fields_for :choices do |t| %>
     <%= render "posts/choice_fields", f: t %>
@@ -21,3 +32,6 @@
   </div>
   <%= f.submit '投稿' %>
 <% end %>
+
+
+</div>

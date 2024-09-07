@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   accepts_nested_attributes_for :choices
 
+  validates :title, presence: true
+
   def self.search_for(content, method)
     if method == 'perfect'
       Post.where(title: content)

@@ -43,8 +43,12 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main class="mb-auto">
+       <%= yield %>
     </main>
-    <%= yield %>
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,7 +1,7 @@
 <% if @model == 'user' %>
 	<h3>Users search for "<%= @content %>"</h3>
   <%= render '/users', users: @records %>
-  
+
 <% elsif @model == 'post' %>
 	<h3>Posts search for "<%= @content %>"</h3>
 
@@ -23,7 +23,7 @@
 
       </td>
       <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
-          <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
+          <%= link_to'Vote', post_path(post.id), class: 'btn btn-outline-info' %>
       </td>
     </tr>
    <% end %>

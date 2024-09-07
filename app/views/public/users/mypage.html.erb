@@ -1,12 +1,17 @@
 <div class="container">
 
-<h1>Mypage</h1>
+<h1>マイページ</h1>
+<h2>Information</h2>
+<div>
+ <p>ユーザーネーム：<%= @user.name %></p>
+<div class="col-5 text-center"> <%= link_to "編集", edit_user_path(current_user.id), class:"btn btn-success" %></div>
+</div>
 
-<h2>My Posts</h2>
+<h2>あなたの投稿</h2>
 <table class ="table table-striped">
  <thead>
     <tr>
-      <th>Title</th><th>Body</th><th>Choice</th><th>Comments</th><th colspan="1"></th>
+      <th>投稿タイトル</th><th colspan="1"></th><th>投票</th><th>コメント数</th><th colspan="1"></th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +26,7 @@
       </td>
       <td><p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p></td>
       <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
-          <%= link_to'Show', post_path(post.id), class: 'btn btn-outline-info' %>
+          <%= link_to'Vote', post_path(post.id), class: 'btn btn-outline-info' %>
       </td>
     </tr>
    <% end %>
@@ -29,9 +34,9 @@
 </table>
 <div class="container">
  <div class="row">
-  <div class="col-4 text-center"> <%= link_to "登録情報", edit_user_path(current_user.id), class:"btn btn-success" %></div>
-  <div class="col-4 text-center"><%= link_to '投稿フォーム', new_post_path, class:"btn btn-warning" %></div>
-  <div class="col-4 text-center"><%= link_to'みんなの投稿', posts_path, class: 'btn btn-info' %></div>
+
+  <div class="col-6 text-center"><%= link_to '投稿フォーム', new_post_path, class:"btn btn-warning" %></div>
+  <div class="col-6 text-center"><%= link_to'みんなの投稿', posts_path, class: 'btn btn-info' %></div>
  </div>
 </div>
 

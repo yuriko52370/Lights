@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <h2>Title</h2>
     <p><%= @post.title %></p>
 
@@ -42,11 +42,6 @@
 
       total : <%= total_count %>
     </p>
-    
-    <canvas id="chart">
-      Canvas not supported...
-    </canvas>
-
     <div>
     <p>コメント件数：<%= @post.comments.count %></p>
     <% @post.comments.each do |comment| %>
@@ -60,7 +55,9 @@
       <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
       <%= f.submit "送信する" %>
     <% end %>
+
+    <%= link_to'みんなの投稿へ', posts_path, class: 'btn btn-info' %>
 </div>
 
-    
+
 </div>
