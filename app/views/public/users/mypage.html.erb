@@ -25,8 +25,9 @@
         <% end %>
       </td>
       <td><p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p></td>
-      <td><%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
-          <%= link_to'Vote', post_path(post.id), class: 'btn btn-outline-info' %>
+      <td>
+        <%= link_to'Vote', post_path(post.id), class: 'btn btn-outline-info' %>
+        <%= link_to'Edit', edit_post_path(post.id), class: 'btn btn-outline-success' %>
       </td>
     </tr>
    <% end %>
