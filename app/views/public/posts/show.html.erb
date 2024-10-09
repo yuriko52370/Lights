@@ -42,6 +42,8 @@
 
       total : <%= total_count %>
     </p>
+    <canvas id="Chart"></canvas>
+
     <div>
     <p>コメント件数：<%= @post.comments.count %></p>
     <% @post.comments.each do |comment| %>
