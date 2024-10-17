@@ -16,9 +16,15 @@
 
     <p>
       <% total_count = 0 %>
+      <% choice_labels = [] %>
+      <% favorite_counts = [] %>
+
       <% @post.choices.each do |one_choice| %>
         <% total_count += one_choice.favorites.count %>
         <%= one_choice.choice %>
+
+        <% choice_labels << one_choice.choice.to_json %>
+        <% favorite_counts << one_choice.favorites.count %>
 
         <% if one_choice.favorited_by?(current_user) %>
           <p>
@@ -36,13 +42,68 @@
             <% end %>
           </p>
         <% end %>
-
         <br>
       <% end %>
 
       total : <%= total_count %>
     </p>
+
     <canvas id="Chart"></canvas>
+
+    <script>
+      document.addEventListener('turbolinks:load', function () {
+        let ctx = document.getElementById('Chart').getContext('2d');
+
+        let total = <%= total_count %>;
+        let labels = <%= choice_labels.to_json.html_safe %>;
+        let data = <%= favorite_counts.to_json.html_safe %>;
+
+
+        if (data.length > 0) {
+          const dataset = data.map(count => (count / total) * 100);
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Total'],
+              datasets: [{
+                label: 'Favorites',
+                data: dataset,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              indexAxis: 'y',
+              scales: {
+                x: {
+                  stacked: true,
+                  beginAtZero: true,
+                  max: 100
+                },
+                y: {
+                  stacked: true,
+                  beginAtZero: true,
+                }
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function(context) {
+                      return context.label + ': ' + context.raw.toFixed(2) + '%';
+                    }
+                  }
+                }
+              }
+            }
+          });
+        } else {
+          console.log('No data available for the chart');
+        }
+      });
+      </script>
 
     <div>
     <p>コメント件数：<%= @post.comments.count %></p>
@@ -59,7 +120,6 @@
     <% end %>
 
     <%= link_to'みんなの投稿へ', posts_path, class: 'btn btn-info' %>
-</div>
-
+  </div>
 
 </div>
