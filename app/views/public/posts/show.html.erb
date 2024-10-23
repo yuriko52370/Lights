@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <div class="col-8">
     <h2>Title</h2>
     <p><%= @post.title %></p>
 
@@ -122,7 +123,8 @@
         }
       });
       </script>
-
+    </div>
+    <div class="col-4">
     <div>
     <p>コメント件数：<%= @post.comments.count %></p>
     <% @post.comments.each do |comment| %>
@@ -130,14 +132,18 @@
       <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
       </br>
     <% end %>
-  </div>
+    </div>
+
   <div>
     <%= form_with model: [@post, @comment] do |f| %>
       <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
       <%= f.submit "送信する" %>
     <% end %>
-
+  </div>
+  </div>
+ </div>
+  <div class="row">
     <%= link_to'みんなの投稿へ', posts_path, class: 'btn btn-info' %>
   </div>
-  </div>
+
 </div>
