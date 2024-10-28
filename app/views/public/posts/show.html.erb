@@ -1,22 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-    <h2>Title</h2>
-    <p><%= @post.title %></p>
+      <h2>Title</h2>
+        <p><%= @post.title %></p>
 
-    <h2>Body</h2>
-    <p><%= @post.body %></p>
+      <h2>Body</h2>
+        <p><%= @post.body %></p>
 
-    <h2>Choice</h2>
+      <h2>Choice</h2>
+        <% is_not_choice = true %>
+        <% @post.choices.each do |one_choice| %>
+          <% if one_choice.favorited_by?(current_user) %>
+            <% is_not_choice = false %>
+          <% end %>
+        <% end %>
 
-    <% is_not_choice = true %>
-    <% @post.choices.each do |one_choice| %>
-      <% if one_choice.favorited_by?(current_user) %>
-        <% is_not_choice = false %>
-      <% end %>
-    <% end %>
-
-    <p>
+      <p>
       <% total_count = 0 %>
       <% choice_labels = [] %>
       <% favorite_counts = [] %>
@@ -28,13 +27,13 @@
         <% choice_labels << one_choice.choice.to_json %>
         <% favorite_counts << one_choice.favorites.count %>
 
+
         <% if one_choice.favorited_by?(current_user) %>
           <p>
             <%= link_to post_choice_favorite_path(@post, one_choice.id), method: :delete do %>
               ♥<%= one_choice.favorites.count %> いいね
             <% end %>
           </p>
-
         <% elsif is_not_choice == false %>
           <p>別の選択肢を選んでいます</p>
         <% else %>
@@ -44,15 +43,15 @@
             <% end %>
           </p>
         <% end %>
-        <br>
+      <br>
       <% end %>
 
       total : <%= total_count %>
-    </p>
+      </p>
 
-    <canvas id="Chart"></canvas>
+      <canvas id="Chart"></canvas>
 
-    <script>
+      <script>
       document.addEventListener('turbolinks:load', function () {
         let ctx = document.getElementById('Chart').getContext('2d');
 
@@ -63,23 +62,24 @@
 
         if (data.length > 0) {
           const backgroundColors = [
-            'rgba(75, 192, 192, 0.6)',
-            'rgba(255, 99, 132, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            'rgba(153, 102, 255, 0.6)',
-            'rgba(255, 159, 64, 0.6)'
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)'
           ];
 
           const borderColors = [
-            'rgba(75, 192, 192, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+          'rgba(75, 192, 192, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
           ];
-         const datasets = data.map((count, index) => ({
+
+          const datasets = data.map((count, index) => ({
             label: labels[index],
             data: [(count / total) * 100],
             backgroundColor: backgroundColors[index % backgroundColors.length],
@@ -119,29 +119,30 @@
             }
           });
         } else {
-          console.log('No data available for the chart');
+        console.log('No data available for the chart');
         }
       });
       </script>
     </div>
-    <div class="col-4">
-       <p>コメント件数：<%= @post.comments.count %></p>
-      <div>
-    <%= form_with model: [@post, @comment] do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
-  </div>
-    <div>
 
-    <% @post.comments.each do |comment| %>
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-      </br>
-    <% end %>
+    <div class="col-4">
+      <p>コメント件数：<%= @post.comments.count %></p>
+      <div>
+        <%= form_with model: [@post, @comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
+      <div>
+        <% @post.comments.each do |comment| %>
+          <%= comment.user.name %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+          </br>
+        <% end %>
+      </div>
     </div>
   </div>
- </div>
+
   <div class="row">
     <%= link_to'みんなの投稿へ', posts_path, class: 'btn btn-info' %>
   </div>
