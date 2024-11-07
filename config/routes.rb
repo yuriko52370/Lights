@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get "homes/about" => "homes#about", as: "about"
     get '/search', to: 'searches#search'
 
-    resources :posts, only: [:new, :create, :index, :show, :edit, :update] do
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :choice, only: [:new, :create, :index, :show, :edit, :update] do
         resource :favorite, only: [:create, :destroy]
       end
