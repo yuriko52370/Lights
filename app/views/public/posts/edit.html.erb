@@ -28,6 +28,12 @@
   </div>
 
   <div class="row d-flex justify-content-center">
+    <% if @post.user == current_user %>
+      <%= link_to"削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？",  class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+
+  <div class="row d-flex justify-content-center">
     <%= link_to'Back', mypage_user_path, class: 'btn btn-info' %>
   </div>
 

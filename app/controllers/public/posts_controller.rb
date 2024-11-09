@@ -38,8 +38,8 @@ class Public::PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
-    post.delete
-    redirect_to post_path(post.id)
+    post.destroy
+    redirect_to mypage_user_path(current_user), notice: 'Post was successfully deleted.'
   end
 
   private
